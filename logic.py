@@ -46,14 +46,14 @@ def proof_to_latex(premises, steps, checks):
 	tex = r"\begin{enumerate}"
 
 	for premise in premises:
-		tex += r"\item " + premise.to_flat_text() + ", premise\n"
+		tex += r'\item ``' + premise.to_flat_text().strip() + ",\" premise\n"
 
 	assert len(steps) == len(checks), "proof length should be same as checks length"
 
 	for i in range(len(steps)):
 		step = steps[i]
 		check = checks[i]
-		tex += r"\item " + step.to_flat_text().strip() + ", " + ", ".join(str(j+1) for j in check[0]) + " " + check[1].name
+		tex += r'\item ``' + step.to_flat_text().strip() + ",\" " + ", ".join(str(j+1) for j in check[0]) + " " + check[1].name
 
 	tex += "\n\n" + r"\end{enumerate}"
 
@@ -361,6 +361,11 @@ def run_logic_tests():
 			[grammar.parse(tokenize(premise))[0] for premise in test["premises"]],
 			[grammar.parse(tokenize(step))[0] for step in test["steps"]],
 		)
+		# latex_to_pdf(wrap_latex(proof_to_latex(
+		# 	[grammar.parse(tokenize(premise))[0] for premise in test["premises"]],
+		# 	[grammar.parse(tokenize(step))[0] for step in test["steps"]],
+		# 	checks
+		# )))
 		if str(checks) != test["expected"]:
 			print(f"""Failed. Expected: {test["expected"]}
 Got: {str(checks)}
