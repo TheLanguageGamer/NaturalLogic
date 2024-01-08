@@ -95,3 +95,5 @@ Output result of proof checker to PDF:
 latex_to_pdf(wrap_latex(proof_to_latex(proof["premises"], proof["steps"], checks)))
 ```
 
+Which will generate a PDF that looks like this:
+![](https://raw.githubusercontent.com/TheLanguageGamer/NaturalLogic/main/output/proof_check_image.png)
